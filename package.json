@@ -1,5 +1,5 @@
 {
-  "name": "@slickteam/nestjs-warp10",
+  "name": "@slickteam/nestjs-utils",
   "description": "Utils functions and classes for Nestjs",
   "version": "1.0.0",
   "keywords": [
