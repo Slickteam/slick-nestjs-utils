@@ -1,5 +1,7 @@
 # Slick Nestjs Utils
 
+Available on npmjs.org : [@slickteam/nestjs-utils](https://www.npmjs.com/package/@slickteam/nestjs-utils)
+
 ## Usage
 
 - Install dependency
@@ -32,4 +34,4 @@ function test() {
 
 Nestjs
 
-- `@nestjs/common`: `^10.4.4`
+- `@nestjs/common`: `^10.4.7`
