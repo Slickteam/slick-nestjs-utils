@@ -34,4 +34,4 @@ function test() {
 
 Nestjs
 
-- `@nestjs/common`: `^10.4.7`
+- `@nestjs/common`: `^11.0.4`
