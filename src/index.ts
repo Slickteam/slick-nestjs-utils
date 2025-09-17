@@ -1,9 +1,4 @@
-import { InternalServerErrorException, LogLevel, Logger, NotFoundException } from '@nestjs/common';
-
-enum ErrorEnum {
-  INTERNAL_ERROR,
-  NOT_FOUND,
-}
+import { HttpException, HttpStatus, LogLevel, Logger } from '@nestjs/common';
 
 function LoggerParams(level: LogLevel = 'verbose') {
   return (target: { constructor: { name: string } }, propertyKey: string, descriptor: PropertyDescriptor) => {
@@ -46,14 +41,19 @@ function LoggerParams(level: LogLevel = 'verbose') {
   };
 }
 
-function throwErrorAndLog(logger: Logger | undefined, message: any, typeError = ErrorEnum.INTERNAL_ERROR): never {
-  let error;
-  if (typeError === ErrorEnum.NOT_FOUND) {
-    error = new NotFoundException(message);
+function throwErrorAndLog(message: any, typeError = HttpStatus.INTERNAL_SERVER_ERROR, logger: Logger | undefined): never {
+  const error = new HttpException(message, typeError);
+  if (logger) {
+    logger?.error(message);
   } else {
-    error = new InternalServerErrorException(message);
+    Logger.error(message);
   }
-  logger?.error(message);
+  throw error;
+}
+
+function throwErrorAndLogWithContext(message: any, typeError = HttpStatus.INTERNAL_SERVER_ERROR, context?: string): never {
+  const error = new HttpException(message, typeError);
+  Logger.error(message, context);
   throw error;
 }
 
@@ -74,4 +74,4 @@ function logLevel(level: LogLevel): LogLevel[] {
   return levelTab;
 }
 
-export { LoggerParams, ErrorEnum, throwErrorAndLog, logLevel };
+export { LoggerParams, throwErrorAndLog, throwErrorAndLogWithContext, logLevel };
