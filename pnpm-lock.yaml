@@ -16,8 +16,8 @@ importers:
         specifier: ^11.0.16
         version: 11.0.16(@types/node@24.10.9)
       '@slickteam/prettier':
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
       '@types/node':
         specifier: ^24.10.9
         version: 24.10.9
@@ -460,8 +460,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.2'
 
-  '@slickteam/prettier@2.0.0':
-    resolution: {integrity: sha512-JW3yzYD1n436ewi3ssvRItHlnq24g+dqv4nGG3lacU4XyByxxM6d3pzqBLlmuvTbyMwuuBpq5yC2Qg2Jguv28Q==}
+  '@slickteam/prettier@2.0.1':
+    resolution: {integrity: sha512-4fKiE0Pgpdyno+pJVbXOoO45EOufnYQ4hGMHJ3kZwQeYmqrITeQXnYhbXz7iopU2gVMdSZy75OVN7e6YFC6PRQ==}
     hasBin: true
 
   '@tokenizer/inflate@0.4.1':
@@ -763,15 +763,6 @@ packages:
 
   create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
-
-  debug@4.4.0:
-    resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -1475,7 +1466,7 @@ snapshots:
       '@babel/parser': 7.29.0
       '@babel/template': 7.28.6
       '@babel/types': 7.29.0
-      debug: 4.4.0
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -1835,7 +1826,7 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@slickteam/prettier@2.0.0':
+  '@slickteam/prettier@2.0.1':
     dependencies:
       '@trivago/prettier-plugin-sort-imports': 6.0.2(prettier@3.8.1)
       prettier: 3.8.1
@@ -2145,10 +2136,6 @@ snapshots:
       typescript: 5.9.3
 
   create-require@1.1.1: {}
-
-  debug@4.4.0:
-    dependencies:
-      ms: 2.1.3
 
   debug@4.4.3:
     dependencies:
