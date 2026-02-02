@@ -23,12 +23,20 @@ import { LoggerParams } from '@slickteam/nestjs-utils';
 class UserService {
   @LoggerParams() // Default: 'verbose' level
   findUser(id: string, options: object) {
-    // Logs: "findUser([0]=123,[1]=[object Object])" at verbose level
+    // Logs: "findUser([0]=123,[1]={...})" at verbose level
   }
 
   @LoggerParams('debug')
   createUser(name: string) {
-    // Logs: "createUser([0]=John)" at debug level
+    // Logs: "createUser([0]="John")" at debug level
+  }
+
+  @LoggerParams({
+    level: 'debug',
+    paramNames: ['userId', 'userData'],
+  })
+  updateUser(id: string, data: object) {
+    // Logs: "updateUser(userId="123", userData={...})" at debug level
   }
 }
 ```
@@ -36,6 +44,9 @@ class UserService {
 **Parameters:**
 
 - `level` (optional): Log level - `'verbose'` | `'debug'` | `'log'` | `'warn'` | `'error'`. Default: `'verbose'`
+- `paramNames` (optional): Array of parameter names to use instead of indices. If provided, must match the number of parameters.
+
+> **Note:** You can pass either a string for the log level, or an options object with `level` and `paramNames` properties.
 
 ### throwErrorAndLog
 

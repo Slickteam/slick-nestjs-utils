@@ -1,19 +1,38 @@
 import { HttpException, HttpStatus, LogLevel, Logger } from '@nestjs/common';
 
-function LoggerParams(level: LogLevel = 'verbose') {
+interface LoggerParamsOptions {
+  level?: LogLevel;
+  paramNames?: string[];
+}
+
+function LoggerParams(options: LogLevel | LoggerParamsOptions = 'verbose') {
+  const level = typeof options === 'string' ? options : options.level || 'verbose';
+  const paramNames = typeof options === 'object' && options.paramNames ? options.paramNames : undefined;
+
   return (target: { constructor: { name: string } }, propertyKey: string, descriptor: PropertyDescriptor) => {
     const original: (...args: unknown[]) => unknown = descriptor.value;
     descriptor.value = function (...args: unknown[]) {
       let message = `${propertyKey}(`;
       for (let i = 0; i < args.length; i++) {
         const arg = args[i];
+        const paramName = paramNames && paramNames[i] ? paramNames[i] : `[${i}]`;
+
         if (Array.isArray(arg)) {
-          message += `[${i}]=${arg.length}`;
+          message += `${paramName}=[Array(${arg.length})]`;
+        } else if (arg === null) {
+          message += `${paramName}=null`;
+        } else if (arg === undefined) {
+          message += `${paramName}=undefined`;
+        } else if (typeof arg === 'object') {
+          message += `${paramName}={...}`;
+        } else if (typeof arg === 'string') {
+          message += `${paramName}="${arg}"`;
         } else {
-          message += `[${i}]=${String(arg)}`;
+          message += `${paramName}=${String(arg)}`;
         }
+
         if (i < args.length - 1) {
-          message += ',';
+          message += ', ';
         }
       }
       message += ')';
